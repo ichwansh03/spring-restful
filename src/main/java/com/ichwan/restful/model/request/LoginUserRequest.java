@@ -1,4 +1,4 @@
-package com.ichwan.restful.model;
+package com.ichwan.restful.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class RegisterUserRequest {
+public class LoginUserRequest {
 
     @NotBlank
     @Size(max = 100)
@@ -21,8 +21,4 @@ public class RegisterUserRequest {
     @NotBlank
     @Size(max = 100)
     private String password;
-
-    @NotBlank
-    @Size(max = 100)
-    private String name;
 }
