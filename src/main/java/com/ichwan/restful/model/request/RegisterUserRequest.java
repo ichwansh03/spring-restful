@@ -1,4 +1,4 @@
-package com.ichwan.restful.model;
+package com.ichwan.restful.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

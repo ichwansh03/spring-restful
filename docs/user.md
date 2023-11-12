@@ -6,9 +6,9 @@ Endpoint: POST /api/users
 Request Body :
 ```json
 {
-  "username" : "sa",
-  "password" : "admin",
-  "name" : "Ichwan Sholihin"
+  "username" : "string",
+  "password" : "string",
+  "name" : "string"
 }
 ```
 Response Body [Success] :
@@ -30,8 +30,8 @@ Endpoint: POST /api/auth/login
 Request Body :
 ```json
 {
-  "username" : "sa",
-  "password" : "admin"
+  "username" : "string",
+  "password" : "string"
 }
 ```
 Response Body [Success] :
@@ -39,7 +39,7 @@ Response Body [Success] :
 {
   "data" : {
     "token" : "barrier <your token>",
-    "expiredAt" : "time ms"
+    "expiredAt" : "time millisecond"
   }
 }
 ```
@@ -60,8 +60,8 @@ Response Body [Success] :
 ```json
 {
   "data" : {
-    "username" : "sa",
-    "name" : "Ichwan Sholihin"
+    "username" : "string",
+    "name" : "string"
   }
 }
 ```
@@ -81,16 +81,16 @@ Request Header :
 Request Body :
 ```json
 {
-  "name" : "Ichwan",
-  "password" : "new password"
+  "name" : "string",
+  "password" : "string"
 }
 ```
 Response Body [Success] :
 ```json
 {
   "data" : {
-    "username" : "sa",
-    "name" : "Ichwan Sholihin"
+    "username" : "string",
+    "name" : "string"
   }
 }
 ```
