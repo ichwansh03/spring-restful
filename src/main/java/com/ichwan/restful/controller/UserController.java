@@ -1,12 +1,15 @@
 package com.ichwan.restful.controller;
 
-import com.ichwan.restful.model.LoginUserRequest;
-import com.ichwan.restful.model.RegisterUserRequest;
-import com.ichwan.restful.model.TokenResponse;
-import com.ichwan.restful.model.WebResponse;
+import com.ichwan.restful.entity.User;
+import com.ichwan.restful.model.request.LoginUserRequest;
+import com.ichwan.restful.model.request.RegisterUserRequest;
+import com.ichwan.restful.model.response.TokenResponse;
+import com.ichwan.restful.model.response.UserResponse;
+import com.ichwan.restful.model.response.WebResponse;
 import com.ichwan.restful.service.userservice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,5 +42,20 @@ public class UserController {
     public WebResponse<TokenResponse> login(@RequestBody LoginUserRequest request){
         TokenResponse tokenResponse = userService.login(request);
         return WebResponse.<TokenResponse>builder().data(tokenResponse).build();
+    }
+
+    /**
+     * jika ada controller yg membutuhkan data user, maka akan otomatis menggunakan
+     * UserArgumentResolver untuk mendapatkan data usernya
+     * @param user
+     * @return
+     */
+    @GetMapping(
+            path = "api/users/current",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<UserResponse> get(User user){
+        UserResponse userResponse = userService.get(user);
+        return WebResponse.<UserResponse>builder().data(userResponse).build();
     }
 }

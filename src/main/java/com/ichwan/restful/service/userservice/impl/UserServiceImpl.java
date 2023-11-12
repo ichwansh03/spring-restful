@@ -1,9 +1,10 @@
 package com.ichwan.restful.service.userservice.impl;
 
 import com.ichwan.restful.entity.User;
-import com.ichwan.restful.model.LoginUserRequest;
-import com.ichwan.restful.model.RegisterUserRequest;
-import com.ichwan.restful.model.TokenResponse;
+import com.ichwan.restful.model.request.LoginUserRequest;
+import com.ichwan.restful.model.request.RegisterUserRequest;
+import com.ichwan.restful.model.response.TokenResponse;
+import com.ichwan.restful.model.response.UserResponse;
 import com.ichwan.restful.repository.UserRepository;
 import com.ichwan.restful.security.BCrypt;
 import com.ichwan.restful.service.ValidationService;
@@ -39,6 +40,14 @@ public class UserServiceImpl implements UserService {
         user.setName(request.getName());
 
         userRepository.save(user);
+    }
+
+    @Override
+    public UserResponse get(User user) {
+        return UserResponse.builder()
+                .username(user.getUsername())
+                .name(user.getName())
+                .build();
     }
 
     @Transactional

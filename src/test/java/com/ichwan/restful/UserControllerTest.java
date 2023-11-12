@@ -1,13 +1,12 @@
 package com.ichwan.restful;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ichwan.restful.entity.User;
-import com.ichwan.restful.model.LoginUserRequest;
-import com.ichwan.restful.model.RegisterUserRequest;
-import com.ichwan.restful.model.TokenResponse;
-import com.ichwan.restful.model.WebResponse;
+import com.ichwan.restful.model.request.LoginUserRequest;
+import com.ichwan.restful.model.request.RegisterUserRequest;
+import com.ichwan.restful.model.response.TokenResponse;
+import com.ichwan.restful.model.response.WebResponse;
 import com.ichwan.restful.repository.UserRepository;
 import com.ichwan.restful.security.BCrypt;
 import org.junit.jupiter.api.Assertions;
@@ -19,8 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-import java.lang.reflect.Type;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
