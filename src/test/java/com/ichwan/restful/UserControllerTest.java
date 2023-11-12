@@ -6,6 +6,7 @@ import com.ichwan.restful.entity.User;
 import com.ichwan.restful.model.request.LoginUserRequest;
 import com.ichwan.restful.model.request.RegisterUserRequest;
 import com.ichwan.restful.model.response.TokenResponse;
+import com.ichwan.restful.model.response.UserResponse;
 import com.ichwan.restful.model.response.WebResponse;
 import com.ichwan.restful.repository.UserRepository;
 import com.ichwan.restful.security.BCrypt;
@@ -18,8 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -176,6 +176,32 @@ class UserControllerTest {
             User userDb = userRepository.findById("boedi").orElse(null);
             Assertions.assertNotNull(userDb);
             Assertions.assertEquals(userDb.getToken(), response.getData().getToken());
+        });
+    }
+
+    @Test
+    void getUserSuccess() throws Exception {
+        User user = new User();
+        user.setUsername("test");
+        user.setPassword(BCrypt.hashpw("password",BCrypt.gensalt()));
+        user.setName("Test");
+        user.setToken("test");
+        user.setTokenExpiredAt(System.currentTimeMillis()+10000000000L);
+        userRepository.save(user);
+
+        mockMvc.perform(
+                get("/api/users/current")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .header("X-API-TOKEN","test")
+        ).andExpectAll(
+                status().isOk()
+        ).andDo(result -> {
+            WebResponse<UserResponse> response = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {
+            });
+
+            Assertions.assertNull(response.getError());
+            Assertions.assertEquals("test", response.getData().getUsername());
+            Assertions.assertEquals("Test", response.getData().getName());
         });
     }
 }
