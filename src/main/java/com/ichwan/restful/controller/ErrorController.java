@@ -1,6 +1,6 @@
 package com.ichwan.restful.controller;
 
-import com.ichwan.restful.model.WebResponse;
+import com.ichwan.restful.model.response.WebResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
