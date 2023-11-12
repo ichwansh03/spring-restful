@@ -36,8 +36,13 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         }
 
         //jika ada maka akan diquery ke db, jika tidak ada maka throw exception kembali
-        return userRepository.findFirstByToken(token)
+        User user = userRepository.findFirstByToken(token)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized"));
 
+        if (user.getTokenExpiredAt() < System.currentTimeMillis()){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+        }
+
+        return user;
     }
 }
